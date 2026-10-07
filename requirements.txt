@@ -1,7 +1,9 @@
 fastapi==0.142.4
 httpx==0.28.1
 nautilus_ibapi==10.45.1
-nautilus_trader==1.231.0
+# 1.231.0 hat für macOS nur Wheels ab macOS 26 – auf älterem macOS 1.230.0 nutzen
+nautilus_trader==1.231.0; sys_platform != "darwin"
+nautilus_trader==1.230.0; sys_platform == "darwin"
 pandas==3.0.6
 plotly==7.1.0
 protobuf==7.36.2
