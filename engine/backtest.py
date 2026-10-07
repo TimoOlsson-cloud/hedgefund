@@ -105,7 +105,14 @@ def _num(value) -> float | None:
     return None if math.isnan(f) or math.isinf(f) else f
 
 
+# Hält den Log-Guard der ersten Engine fest: wird er freigegeben, versucht die
+# nächste Engine den Rust-Logger erneut zu setzen und der Prozess bricht ab
+# (nautilus_trader 1.230.0: "attempted to set a logger after the logging system was already initialized").
+_LOG_GUARD = None
+
+
 def run_backtest(req: BacktestRequest) -> dict:
+    global _LOG_GUARD
     req.validate()
     entry = all_datasets()[req.dataset]
 
@@ -115,6 +122,8 @@ def run_backtest(req: BacktestRequest) -> dict:
             logging=LoggingConfig(log_level="ERROR"),
         ),
     )
+    if _LOG_GUARD is None:
+        _LOG_GUARD = engine.kernel.get_log_guard()
     try:
         if entry["kind"] == "ticks":
             instrument, data = _load_ticks(req.dataset)

@@ -66,5 +66,5 @@ RiskEngine mit max. 1.000 USD(T) pro Order und max. 5 Orders pro Sekunde. Echtes
 | `data/` | Marktdaten (aktuell Beispiel-Ticks ETHUSDT 14.08.2020) |
 | `tests/` | Tests inkl. Offline-Attrappen für Binance und IB |
 
-Version gepinnt auf `nautilus_trader==1.231.0` (der GitHub-`develop`-Branch ist bereits v2 und nicht kompatibel).
+Version gepinnt auf `nautilus_trader==1.231.0` (auf macOS < 26 `1.230.0`, da es dafür keine 1.231.0-Wheels gibt; der GitHub-`develop`-Branch ist bereits v2 und nicht kompatibel).
 Backtest-Ergebnisse liegen vorerst nur im Speicher und sind nach einem Neustart weg.
